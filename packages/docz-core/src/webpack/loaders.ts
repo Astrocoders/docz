@@ -6,6 +6,12 @@ import { Config as Args } from '../commands/args'
 import * as paths from '../config/paths'
 import * as mdxConfig from '../config/mdx'
 
+interface DocGenType {
+  parent?: {
+    fileName: string
+  }
+}
+
 export const sourceMaps = (config: Config, args: Args) => {
   const srcPath = path.resolve(paths.root, args.src)
 
@@ -43,6 +49,12 @@ export const js = (config: Config, args: Args) => {
       rule
         .use('typescript')
         .loader(require.resolve('react-docgen-typescript-loader'))
+        .options({
+          propFilter: (prop: DocGenType) => {
+            if (prop.parent == null) return true
+            return !prop.parent.fileName.includes('node_modules')
+          }
+        })
     )
 }
 
