@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 const yargs = require('yargs')
-const { args: defaultArgs, setEnv } = require('docz-core')
+const { args: defaultArgs, setEnv } = require('@astrocoders/docz-core')
 
 const execCommand = cmd => async args =>
-  require('docz-core').commands[cmd](args)
+  require('@astrocoders/docz-core').commands[cmd](args)
 
 yargs
   .command(

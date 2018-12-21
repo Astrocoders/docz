@@ -54,7 +54,7 @@ export const getBabelConfig = async (
           'docz',
           'docz-theme-default',
           'docz-utils',
-          'docz-core',
+          '@astrocoders/docz-core',
           'babel-preset-docz',
         ]
       ),
