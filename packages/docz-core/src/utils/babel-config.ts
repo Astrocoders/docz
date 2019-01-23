@@ -51,10 +51,10 @@ export const getBabelConfig = async (
       cacheIdentifier: getCacheIdentifier(
         isProd ? 'production' : isDev && 'development',
         [
-          'docz',
+          '@astrocoders/docz',
           'docz-theme-default',
           'docz-utils',
-          'docz-core',
+          '@astrocoders/docz-core',
           'babel-preset-docz',
         ]
       ),

@@ -1,5 +1,5 @@
 {
-  "name": "docz-core",
+  "name": "@astrocoders/docz-core",
   "version": "0.13.7",
   "description": "All docz core logic of bundle and parsing is included on this package",
   "license": "MIT",

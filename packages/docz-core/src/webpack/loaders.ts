@@ -7,6 +7,11 @@ import * as paths from '../config/paths'
 import * as mdxConfig from '../config/mdx'
 
 const excludeNodeModules = (filepath: string) => /node_modules/.test(filepath)
+interface DocGenType {
+  parent?: {
+    fileName: string
+  }
+}
 
 export const sourceMaps = (config: Config, args: Args) => {
   const srcPath = path.resolve(paths.root, args.src)
@@ -41,6 +46,17 @@ export const js = (config: Config, args: Args) => {
     .use('happypack-jsx')
     .loader('happypack/loader?id=jsx')
     .end()
+    .when(args.propsParser && args.typescript, rule =>
+      rule
+        .use('typescript')
+        .loader(require.resolve('react-docgen-typescript-loader'))
+        .options({
+          propFilter: (prop: DocGenType) => {
+            if (prop.parent == null) return true
+            return !prop.parent.fileName.includes('node_modules')
+          }
+        })
+    )
 }
 
 export const mdx = (config: Config, args: Args) => {
